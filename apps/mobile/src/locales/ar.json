@@ -1,6 +1,6 @@
 {
   "app": { "name": "اجتماعات جامعة حائل", "tagline": "نظام إدارة الاجتماعات" },
-  "nav": { "dashboard": "الرئيسية", "committees": "اللجان", "meetings": "الاجتماعات", "tasks": "المهام", "more": "المزيد" },
+  "nav": { "dashboard": "الرئيسية", "committees": "اللجان", "meetings": "الاجتماعات", "chat": "المحادثات", "tasks": "المهام", "more": "المزيد" },
   "auth": {
     "login": "تسجيل الدخول", "logout": "تسجيل الخروج", "email": "البريد الإلكتروني", "password": "كلمة المرور",
     "demoMode": "الوضع التجريبي", "demoLogin": "دخول تجريبي", "biometric": "الدخول بالبصمة",
@@ -19,9 +19,7 @@
     "taskBreakdown": "توزيع المهام", "committeeTypes": "أنواع اللجان",
     "liveMeetingsNow": "جارية الآن", "upcomingMeetingsCount": "القادمة (7 أيام)"
   },
-  "calendar": {
-    "title": "التقويم", "noEvents": "لا توجد أحداث", "allDay": "طوال اليوم"
-  },
+  "calendar": { "title": "التقويم", "noEvents": "لا توجد أحداث", "allDay": "طوال اليوم" },
   "committees": {
     "title": "اللجان", "new": "لجنة جديدة", "edit": "تعديل اللجنة",
     "name": "اسم اللجنة", "nameAr": "الاسم (عربي)", "nameEn": "الاسم (إنجليزي)",
@@ -33,8 +31,8 @@
     "title": "الاجتماعات", "new": "اجتماع جديد", "edit": "تعديل الاجتماع",
     "meetingTitle": "عنوان الاجتماع", "titleAr": "العنوان (عربي)", "titleEn": "العنوان (إنجليزي)",
     "type": "النوع", "status": "الحالة", "date": "التاريخ", "startTime": "وقت البدء", "endTime": "وقت الانتهاء",
-    "location": "الموقع", "onlineLink": "رابط الاجتماع", "agenda": "جدول الأعمال", "invitees": "المدعوون",
-    "minutes": "دقيقة", "presenterName": "اسم المقدّم",
+    "location": "الموقع", "onlineLink": "المنصة الإلكترونية", "agenda": "جدول الأعمال", "invitees": "المدعوون",
+    "minutes": "دقيقة", "presenterName": "اسم المقدّم", "capacity": "السعة",
     "committee": "اللجنة", "info": "المعلومات", "attendance": "الحضور",
     "approvalActions": "إجراءات الموافقة", "approved": "تمت الموافقة على الاجتماع", "rejected": "تم رفض الاجتماع",
     "approveConfirm": "الموافقة على هذا الاجتماع؟", "rejectConfirm": "رفض هذا الاجتماع؟",
@@ -47,7 +45,7 @@
     "title": "المهام", "new": "مهمة جديدة", "edit": "تعديل المهمة",
     "taskTitle": "عنوان المهمة", "titleAr": "العنوان (عربي)", "titleEn": "العنوان (إنجليزي)",
     "assignedTo": "مسند إلى", "dueDate": "تاريخ الاستحقاق", "priority": "الأولوية",
-    "status": "الحالة", "progress": "التقدم", "description": "الوصف",
+    "status": "الحالة", "progress": "التقدم", "description": "الوصف", "category": "الفئة",
     "updateProgress": "تحديث التقدم", "saveProgress": "حفظ التقدم", "progressUpdated": "تم تحديث التقدم بنجاح",
     "changeStatus": "تغيير الحالة", "confirmStatusChange": "تغيير الحالة إلى {{status}}؟",
     "priorities": { "low": "منخفضة", "medium": "متوسطة", "high": "عالية", "critical": "حرجة" },
@@ -86,42 +84,122 @@
     "responseSubmitted": "تم إرسال إجابتك بنجاح",
     "typeAnswer": "اكتب إجابتك...", "surveyNotActive": "هذا الاستبيان لا يقبل ردوداً حالياً"
   },
-  "reports": { "title": "التقارير", "committeeActivity": "نشاط اللجان", "meetingAttendance": "حضور الاجتماعات", "taskPerformance": "أداء المهام" },
-  "workflow": { "title": "قوالب سير العمل", "detail": "تفاصيل سير العمل", "steps": "الخطوات" },
+  "chat": {
+    "title": "المحادثات", "conversations": "المحادثات", "newConversation": "محادثة جديدة",
+    "typeMessage": "اكتب رسالة...", "send": "إرسال", "typing": "يكتب...",
+    "noConversations": "لا توجد محادثات", "noMessages": "لا توجد رسائل",
+    "searchContacts": "البحث عن جهات اتصال...", "startChat": "ابدأ محادثة",
+    "attachFile": "إرفاق ملف", "you": "أنت", "unread": "غير مقروء"
+  },
+  "directives": {
+    "title": "التوجيهات", "new": "توجيه جديد", "detail": "تفاصيل التوجيه",
+    "referenceNumber": "الرقم المرجعي", "issuedBy": "صادر من",
+    "decisions": "القرارات", "noDecisions": "لا توجد قرارات",
+    "statuses": { "draft": "مسودة", "active": "نشط", "closed": "مغلق" }
+  },
+  "evaluations": {
+    "title": "التقييمات", "new": "تقييم جديد", "detail": "تفاصيل التقييم",
+    "template": "القالب", "criteria": "المعايير", "score": "الدرجة",
+    "overallScore": "الدرجة الكلية", "weight": "الوزن", "notes": "ملاحظات",
+    "period": "الفترة", "evaluator": "المقيّم",
+    "noEvaluations": "لا توجد تقييمات"
+  },
+  "acknowledgments": {
+    "title": "الإقرارات", "pending": "بانتظار التوقيع", "history": "السجل",
+    "acknowledge": "إقرار", "acknowledged": "تم الإقرار بنجاح",
+    "mandatory": "إلزامي", "optional": "اختياري",
+    "category": "الفئة", "expiresAt": "تنتهي في",
+    "noPending": "لا توجد إقرارات معلقة", "noHistory": "لا يوجد سجل إقرارات"
+  },
+  "locations": {
+    "title": "المواقع", "detail": "تفاصيل الموقع",
+    "building": "المبنى", "floor": "الطابق", "roomNumber": "رقم الغرفة",
+    "coordinates": "الإحداثيات", "childLocations": "المواقع الفرعية",
+    "types": { "building": "مبنى", "hall": "قاعة", "meeting_room": "غرفة اجتماعات", "lab": "مختبر", "auditorium": "مدرج", "department": "قسم", "outdoor_area": "منطقة خارجية", "gate": "بوابة", "library": "مكتبة", "cafeteria": "كافيتيريا", "parking": "موقف سيارات", "other": "أخرى" }
+  },
+  "rooms": {
+    "title": "حجز القاعات", "availability": "الإتاحة",
+    "building": "المبنى", "capacity": "السعة",
+    "videoConference": "مؤتمرات فيديو", "projector": "بروجكتور",
+    "available": "متاح", "booked": "محجوز", "conflict": "تعارض",
+    "checkAvailability": "فحص الإتاحة"
+  },
+  "approvals": {
+    "title": "الموافقات", "pending": "موافقات معلقة",
+    "noApprovals": "لا توجد موافقات معلقة",
+    "approveConfirm": "الموافقة على هذا العنصر؟", "rejectConfirm": "رفض هذا العنصر؟",
+    "types": { "meeting": "اجتماع", "mom": "محضر", "committee": "لجنة", "changeRequest": "طلب تعديل" }
+  },
+  "changeRequests": {
+    "title": "طلبات التعديل", "detail": "تفاصيل طلب التعديل",
+    "reason": "السبب", "requester": "مقدم الطلب", "reviewer": "المراجع",
+    "reviewNotes": "ملاحظات المراجعة", "changes": "التغييرات",
+    "statuses": { "pending": "معلق", "approved": "مقبول", "rejected": "مرفوض" }
+  },
+  "liveSurvey": {
+    "title": "الاستبيان المباشر", "presenter": "المقدّم", "participant": "المشارك",
+    "joinCode": "رمز الانضمام", "participants": "المشاركون",
+    "nextQuestion": "السؤال التالي", "previousQuestion": "السابق",
+    "startVoting": "بدء التصويت", "stopVoting": "إيقاف التصويت",
+    "endSession": "إنهاء الجلسة", "waitingForQuestion": "بانتظار السؤال التالي...",
+    "sessionEnded": "انتهت الجلسة", "voteCast": "تم إرسال صوتك!",
+    "votes": "صوت"
+  },
+  "archive": {
+    "title": "أرشيفي", "chatAttachments": "ملفات المحادثات",
+    "fileAttachments": "المرفقات", "announcements": "الإعلانات"
+  },
+  "reports": {
+    "title": "التقارير", "committeeActivity": "نشاط اللجان", "meetingAttendance": "حضور الاجتماعات", "taskPerformance": "أداء المهام",
+    "totalMeetings": "إجمالي الاجتماعات", "totalDecisions": "إجمالي القرارات", "totalCompleted": "المهام المكتملة",
+    "overallRate": "المعدل الإجمالي", "completionRate": "معدل الإنجاز", "totalOverdue": "المتأخرة",
+    "committee": "اللجنة", "meetingsCount": "الاجتماعات", "decisionsCount": "القرارات",
+    "meeting": "الاجتماع", "invited": "المدعوون", "present": "الحضور", "rate": "النسبة",
+    "assignee": "المسند إليه", "total": "الإجمالي", "completed": "المكتملة", "overdue": "المتأخرة",
+    "exportExcel": "تصدير إكسل"
+  },
+  "workflow": { "title": "قوالب سير العمل", "detail": "تفاصيل سير العمل", "steps": "الخطوات", "from": "من", "to": "إلى", "action": "الإجراء", "role": "الدور المطلوب" },
   "notifications": { "title": "الإشعارات", "markRead": "تحديد كمقروء", "empty": "لا توجد إشعارات", "unread": "غير مقروء" },
-  "attachments": { "title": "المرفقات", "upload": "رفع ملف", "download": "تحميل", "noFiles": "لا توجد مرفقات" },
-  "admin": { "title": "الإدارة", "auditLog": "سجل المراجعة", "identity": "معلومات الهوية" },
+  "attachments": { "title": "المرفقات", "upload": "رفع ملف", "download": "تحميل", "noFiles": "لا توجد مرفقات", "size": "الحجم", "uploaded": "تاريخ الرفع" },
+  "admin": {
+    "title": "الإدارة", "auditLog": "سجل المراجعة", "identity": "معلومات الهوية",
+    "users": "المستخدمون", "roles": "الأدوار", "permissions": "الصلاحيات",
+    "announcements": "الإعلانات", "adSync": "مزامنة AD", "acknowledgmentsAdmin": "الإقرارات",
+    "userDetail": "تفاصيل المستخدم", "active": "نشط", "inactive": "غير نشط",
+    "toggleActive": "تبديل الحالة", "assignRole": "تعيين دور", "removeRole": "إزالة دور",
+    "roleName": "اسم الدور", "roleKey": "المفتاح", "builtIn": "مدمج", "custom": "مخصص",
+    "permissionGroups": "مجموعات الصلاحيات", "savePermissions": "حفظ الصلاحيات",
+    "syncNow": "مزامنة الآن", "syncHistory": "سجل المزامنة", "lastSync": "آخر مزامنة",
+    "syncTotal": "الإجمالي", "syncCreated": "جديد", "syncUpdated": "محدّث", "syncErrors": "أخطاء",
+    "connectionStatus": "حالة الاتصال",
+    "announcementType": "النوع", "announcementTypes": { "circular": "تعميم", "news": "خبر", "announcement": "إعلان" },
+    "publish": "نشر", "archive": "أرشفة", "templates": "القوالب"
+  },
   "settings": { "title": "الإعدادات", "language": "اللغة", "biometric": "الدخول بالبصمة", "notifications": "الإشعارات", "clearCache": "مسح الذاكرة المؤقتة", "about": "حول التطبيق", "version": "الإصدار", "appearance": "المظهر", "themeLight": "فاتح", "themeDark": "داكن", "themeSystem": "النظام" },
   "profile": {
-    "title": "ملفي الشخصي",
-    "subtitle": "إدارة معلوماتك الشخصية",
+    "title": "ملفي الشخصي", "subtitle": "إدارة معلوماتك الشخصية",
     "personalInfo": "المعلومات الشخصية",
-    "displayNameAr": "الاسم بالعربية",
-    "displayNameEn": "الاسم بالإنجليزية",
-    "jobTitleAr": "المسمى الوظيفي بالعربية",
-    "jobTitleEn": "المسمى الوظيفي بالإنجليزية",
-    "department": "القسم",
-    "phoneNumber": "رقم الهاتف",
-    "email": "البريد الإلكتروني",
-    "employeeId": "الرقم الوظيفي",
-    "changePhoto": "تغيير الصورة",
-    "removePhoto": "إزالة الصورة",
-    "save": "حفظ",
-    "security": "الأمان",
-    "changePassword": "تغيير كلمة المرور",
-    "preferences": "التفضيلات",
-    "language": "اللغة",
-    "theme": "المظهر",
-    "notifyByEmail": "إشعارات البريد",
-    "notifyByPush": "الإشعارات الفورية",
-    "notifyBySms": "إشعارات SMS",
-    "emailDigest": "ملخص البريد",
-    "saved": "تم الحفظ بنجاح",
-    "adManaged": "تُدار بواسطة AD"
+    "displayNameAr": "الاسم بالعربية", "displayNameEn": "الاسم بالإنجليزية",
+    "jobTitleAr": "المسمى الوظيفي بالعربية", "jobTitleEn": "المسمى الوظيفي بالإنجليزية",
+    "department": "القسم", "phoneNumber": "رقم الهاتف",
+    "email": "البريد الإلكتروني", "employeeId": "الرقم الوظيفي",
+    "changePhoto": "تغيير الصورة", "removePhoto": "إزالة الصورة", "save": "حفظ",
+    "security": "الأمان", "changePassword": "تغيير كلمة المرور",
+    "preferences": "التفضيلات", "language": "اللغة", "theme": "المظهر",
+    "notifyByEmail": "إشعارات البريد", "notifyByPush": "الإشعارات الفورية",
+    "notifyBySms": "إشعارات SMS", "emailDigest": "ملخص البريد",
+    "saved": "تم الحفظ بنجاح", "adManaged": "تُدار بواسطة AD"
   },
-  "more": { "title": "المزيد", "moms": "محاضر الاجتماعات", "voting": "التصويت", "surveys": "الاستبيانات", "reports": "التقارير", "workflow": "سير العمل", "attachments": "المرفقات", "admin": "الإدارة", "settings": "الإعدادات", "profile": "ملفي الشخصي" },
-  "actions": { "save": "حفظ", "cancel": "إلغاء", "delete": "حذف", "edit": "تعديل", "create": "إنشاء", "back": "رجوع", "search": "بحث", "filter": "تصفية", "refresh": "تحديث", "confirm": "تأكيد", "close": "إغلاق", "submit": "إرسال", "approve": "اعتماد", "reject": "رفض" },
-  "common": { "all": "الكل", "loading": "جاري التحميل...", "error": "حدث خطأ", "errorOccurred": "حدث خطأ ما", "retry": "إعادة المحاولة", "noData": "لا توجد بيانات", "success": "تم بنجاح", "confirmDelete": "هل أنت متأكد من الحذف؟", "yes": "نعم", "no": "لا", "share": "مشاركة", "cancel": "إلغاء" },
+  "more": {
+    "title": "المزيد", "moms": "محاضر الاجتماعات", "voting": "التصويت", "surveys": "الاستبيانات",
+    "reports": "التقارير", "workflow": "سير العمل", "attachments": "المرفقات",
+    "admin": "الإدارة", "settings": "الإعدادات", "profile": "ملفي الشخصي",
+    "directives": "التوجيهات", "evaluations": "التقييمات", "acknowledgments": "الإقرارات",
+    "locations": "المواقع", "roomBooking": "حجز القاعات", "approvals": "الموافقات",
+    "changeRequests": "طلبات التعديل", "archive": "أرشيفي"
+  },
+  "actions": { "save": "حفظ", "cancel": "إلغاء", "delete": "حذف", "edit": "تعديل", "create": "إنشاء", "back": "رجوع", "search": "بحث", "filter": "تصفية", "refresh": "تحديث", "confirm": "تأكيد", "close": "إغلاق", "submit": "إرسال", "approve": "اعتماد", "reject": "رفض", "download": "تحميل", "upload": "رفع", "share": "مشاركة" },
+  "common": { "all": "الكل", "loading": "جاري التحميل...", "error": "حدث خطأ", "errorOccurred": "حدث خطأ ما", "retry": "إعادة المحاولة", "noData": "لا توجد بيانات", "success": "تم بنجاح", "confirmDelete": "هل أنت متأكد من الحذف؟", "yes": "نعم", "no": "لا", "share": "مشاركة", "cancel": "إلغاء", "from": "من", "to": "إلى", "date": "التاريخ", "status": "الحالة", "name": "الاسم", "description": "الوصف" },
   "errors": { "generic": "حدث خطأ ما", "network": "خطأ في الشبكة", "unauthorized": "انتهت الجلسة", "notFound": "غير موجود", "validation": "يرجى التحقق من النموذج" },
   "demo": { "banner": "الوضع التجريبي", "notice": "أنت في الوضع التجريبي. لن يتم حفظ التغييرات." }
 }

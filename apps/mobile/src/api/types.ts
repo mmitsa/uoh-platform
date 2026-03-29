@@ -252,6 +252,307 @@ export interface CalendarEvent {
   location: string | null;
 }
 
+/* ---- Committee Members ---- */
+export type CommitteeMemberRole = 'head' | 'secretary' | 'member' | 'observer';
+
+export interface CommitteeMember {
+  id: string;
+  committeeId: string;
+  userObjectId: string;
+  displayName: string;
+  email: string;
+  role: CommitteeMemberRole | string;
+  isActive: boolean;
+  joinedAtUtc?: string;
+}
+
+/* ---- Meeting Agenda ---- */
+export interface AgendaItem {
+  id: string;
+  meetingId: string;
+  order: number;
+  titleAr: string;
+  titleEn: string;
+  descriptionAr?: string;
+  descriptionEn?: string;
+  durationMinutes?: number;
+  presenterName?: string;
+}
+
+/* ---- Meeting Invitees ---- */
+export type InviteeRole = 'required' | 'optional' | 'organizer' | 'presenter';
+
+export interface MeetingInvitee {
+  userId: string;
+  displayName: string;
+  email: string;
+  role?: InviteeRole | string;
+  attendanceStatus?: string;
+}
+
+/* ---- Chat ---- */
+export type ConversationType = 'direct' | 'group';
+
+export interface ChatConversation {
+  id: string;
+  type: ConversationType;
+  nameAr?: string;
+  nameEn?: string;
+  lastMessage?: ChatMessage;
+  unreadCount: number;
+  participants: ChatParticipant[];
+  updatedAtUtc: string;
+}
+
+export interface ChatParticipant {
+  userObjectId: string;
+  displayName: string;
+  email: string;
+  joinedAtUtc: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  conversationId: string;
+  senderObjectId: string;
+  senderDisplayName: string;
+  content: string;
+  type: 'text' | 'file' | 'image' | 'audio';
+  attachmentFileIds?: string[];
+  createdAtUtc: string;
+  readByCount?: number;
+}
+
+/* ---- Directives ---- */
+export type DirectiveStatus = 'draft' | 'active' | 'closed';
+
+export interface Directive {
+  id: string;
+  titleAr: string;
+  titleEn: string;
+  descriptionAr?: string;
+  descriptionEn?: string;
+  issuedBy?: string;
+  referenceNumber?: string;
+  status: DirectiveStatus | string;
+  createdAtUtc: string;
+}
+
+export interface DirectiveDecision {
+  id: string;
+  directiveId: string;
+  titleAr: string;
+  titleEn: string;
+  notesAr?: string;
+  notesEn?: string;
+  committeeId?: string;
+}
+
+/* ---- Evaluations ---- */
+export interface EvaluationTemplate {
+  id: string;
+  nameAr: string;
+  nameEn: string;
+  descriptionAr?: string;
+  descriptionEn?: string;
+  maxScore?: number;
+  criteria: EvaluationCriteria[];
+}
+
+export interface EvaluationCriteria {
+  id: string;
+  labelAr: string;
+  labelEn: string;
+  descriptionAr?: string;
+  descriptionEn?: string;
+  maxScore?: number;
+  weight?: number;
+}
+
+export interface Evaluation {
+  id: string;
+  committeeId: string;
+  templateId: string;
+  evaluatorObjectId: string;
+  evaluatorDisplayName: string;
+  periodStart: string;
+  periodEnd: string;
+  overallScore?: number;
+  overallNotesAr?: string;
+  overallNotesEn?: string;
+  responses?: EvaluationResponse[];
+  createdAtUtc: string;
+}
+
+export interface EvaluationResponse {
+  criteriaId: string;
+  score: number;
+  notes?: string;
+}
+
+/* ---- Acknowledgments ---- */
+export type AcknowledgmentStatus = 'draft' | 'published' | 'archived';
+
+export interface AcknowledgmentTemplate {
+  id: string;
+  titleAr: string;
+  titleEn: string;
+  bodyAr: string;
+  bodyEn: string;
+  category: string;
+  isMandatory: boolean;
+  requiresRenewal: boolean;
+  renewalDays?: number;
+  status: AcknowledgmentStatus | string;
+  createdAtUtc: string;
+}
+
+export interface UserAcknowledgment {
+  id: string;
+  templateId: string;
+  titleAr: string;
+  titleEn: string;
+  category: string;
+  isMandatory: boolean;
+  acknowledgedAtUtc?: string;
+  expiresAtUtc?: string;
+}
+
+/* ---- Locations ---- */
+export type LocationType = 'building' | 'hall' | 'meeting_room' | 'lab' | 'auditorium' | 'department' | 'outdoor_area' | 'gate' | 'library' | 'cafeteria' | 'parking' | 'other';
+
+export interface Location {
+  id: string;
+  nameAr: string;
+  nameEn: string;
+  descriptionAr?: string;
+  descriptionEn?: string;
+  type: LocationType | string;
+  building?: string;
+  floor?: string;
+  roomNumber?: string;
+  latitude?: number;
+  longitude?: number;
+  mapImageUrl?: string;
+  parentLocationId?: string;
+  isActive: boolean;
+  children?: Location[];
+}
+
+/* ---- Room Booking ---- */
+export interface RoomAvailability {
+  available: boolean;
+  conflicts: { meetingId: string; titleAr: string; titleEn: string; start: string; end: string }[];
+}
+
+export interface RoomCalendarEntry {
+  roomId: string;
+  roomNameAr: string;
+  roomNameEn: string;
+  bookings: { meetingId: string; titleAr: string; titleEn: string; start: string; end: string; status: string }[];
+}
+
+/* ---- Live Survey ---- */
+export interface LiveSurveySession {
+  id: string;
+  surveyId: string;
+  joinCode: string;
+  presenterKey: string;
+  status: 'waiting' | 'active' | 'ended';
+  createdAtUtc: string;
+}
+
+export interface LiveSessionPublic {
+  id: string;
+  status: string;
+  acceptingVotes: boolean;
+  surveyTitleAr: string;
+  surveyTitleEn: string;
+}
+
+/* ---- Share Links ---- */
+export interface ShareLink {
+  id: string;
+  entityType: string;
+  entityId: string;
+  token: string;
+  expiresAtUtc?: string;
+  isActive: boolean;
+  createdAtUtc: string;
+}
+
+/* ---- Change Requests ---- */
+export type ChangeRequestStatus = 'pending' | 'approved' | 'rejected';
+
+export interface ChangeRequest {
+  id: string;
+  committeeId: string;
+  committeeNameAr?: string;
+  committeeNameEn?: string;
+  requesterObjectId: string;
+  requesterDisplayName: string;
+  reasonAr: string;
+  reasonEn: string;
+  changesJson?: string;
+  status: ChangeRequestStatus | string;
+  reviewerDisplayName?: string;
+  reviewNotesAr?: string;
+  reviewNotesEn?: string;
+  createdAtUtc: string;
+}
+
+/* ---- Approvals ---- */
+export interface ApprovalItem {
+  id: string;
+  type: 'meeting' | 'mom' | 'committee' | 'changeRequest';
+  titleAr: string;
+  titleEn: string;
+  status: string;
+  requestedAtUtc: string;
+  requestedBy: string;
+}
+
+/* ---- Admin ---- */
+export interface AdminUser {
+  id: string;
+  objectId: string;
+  displayName: string;
+  email: string;
+  isActive: boolean;
+  roles: { id: string; nameAr: string; nameEn: string }[];
+  lastLoginUtc?: string;
+}
+
+export interface Role {
+  id: string;
+  key: string;
+  nameAr: string;
+  nameEn: string;
+  descriptionAr?: string;
+  descriptionEn?: string;
+  isActive: boolean;
+  isBuiltIn: boolean;
+}
+
+export interface Permission {
+  id: string;
+  key: string;
+  nameAr: string;
+  nameEn: string;
+  category: string;
+}
+
+export interface Announcement {
+  id: string;
+  titleAr: string;
+  titleEn: string;
+  bodyAr: string;
+  bodyEn: string;
+  type: 'circular' | 'news' | 'announcement';
+  isActive: boolean;
+  createdAtUtc: string;
+}
+
 /* ---- Reports ---- */
 export interface CommitteeActivityReport {
   rows: { committeeId: string; nameAr: string; nameEn: string; meetingsCount: number; decisionsCount: number; tasksCompletedCount: number }[];

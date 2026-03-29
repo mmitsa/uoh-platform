@@ -1,6 +1,6 @@
 {
   "app": { "name": "UOH Meetings", "tagline": "University Meeting Management" },
-  "nav": { "dashboard": "Dashboard", "committees": "Committees", "meetings": "Meetings", "tasks": "Tasks", "more": "More" },
+  "nav": { "dashboard": "Dashboard", "committees": "Committees", "meetings": "Meetings", "chat": "Chat", "tasks": "Tasks", "more": "More" },
   "auth": {
     "login": "Login", "logout": "Logout", "email": "Email", "password": "Password",
     "demoMode": "Demo Mode", "demoLogin": "Demo Login", "biometric": "Biometric Login",
@@ -19,9 +19,7 @@
     "taskBreakdown": "Task Breakdown", "committeeTypes": "Committee Types",
     "liveMeetingsNow": "Live Now", "upcomingMeetingsCount": "Upcoming (7 days)"
   },
-  "calendar": {
-    "title": "Calendar", "noEvents": "No events", "allDay": "All day"
-  },
+  "calendar": { "title": "Calendar", "noEvents": "No events", "allDay": "All day" },
   "committees": {
     "title": "Committees", "new": "New Committee", "edit": "Edit Committee",
     "name": "Committee Name", "nameAr": "Name (Arabic)", "nameEn": "Name (English)",
@@ -33,8 +31,8 @@
     "title": "Meetings", "new": "New Meeting", "edit": "Edit Meeting",
     "meetingTitle": "Meeting Title", "titleAr": "Title (Arabic)", "titleEn": "Title (English)",
     "type": "Type", "status": "Status", "date": "Date", "startTime": "Start Time", "endTime": "End Time",
-    "location": "Location", "onlineLink": "Online Link", "agenda": "Agenda", "invitees": "Invitees",
-    "minutes": "minutes", "presenterName": "Presenter Name",
+    "location": "Location", "onlineLink": "Online Platform", "agenda": "Agenda", "invitees": "Invitees",
+    "minutes": "minutes", "presenterName": "Presenter Name", "capacity": "Capacity",
     "committee": "Committee", "info": "Info", "attendance": "Attendance",
     "approvalActions": "Approval Actions", "approved": "Meeting approved", "rejected": "Meeting rejected",
     "approveConfirm": "Approve this meeting?", "rejectConfirm": "Reject this meeting?",
@@ -47,7 +45,7 @@
     "title": "Tasks", "new": "New Task", "edit": "Edit Task",
     "taskTitle": "Task Title", "titleAr": "Title (Arabic)", "titleEn": "Title (English)",
     "assignedTo": "Assigned To", "dueDate": "Due Date", "priority": "Priority",
-    "status": "Status", "progress": "Progress", "description": "Description",
+    "status": "Status", "progress": "Progress", "description": "Description", "category": "Category",
     "updateProgress": "Update Progress", "saveProgress": "Save Progress", "progressUpdated": "Progress updated successfully",
     "changeStatus": "Change Status", "confirmStatusChange": "Change status to {{status}}?",
     "priorities": { "low": "Low", "medium": "Medium", "high": "High", "critical": "Critical" },
@@ -86,42 +84,122 @@
     "responseSubmitted": "Your response has been submitted successfully",
     "typeAnswer": "Type your answer...", "surveyNotActive": "This survey is not currently accepting responses"
   },
-  "reports": { "title": "Reports", "committeeActivity": "Committee Activity", "meetingAttendance": "Meeting Attendance", "taskPerformance": "Task Performance" },
-  "workflow": { "title": "Workflow Templates", "detail": "Workflow Detail", "steps": "Steps" },
+  "chat": {
+    "title": "Chat", "conversations": "Conversations", "newConversation": "New Conversation",
+    "typeMessage": "Type a message...", "send": "Send", "typing": "typing...",
+    "noConversations": "No conversations yet", "noMessages": "No messages yet",
+    "searchContacts": "Search contacts...", "startChat": "Start a conversation",
+    "attachFile": "Attach file", "you": "You", "unread": "unread"
+  },
+  "directives": {
+    "title": "Directives", "new": "New Directive", "detail": "Directive Details",
+    "referenceNumber": "Reference Number", "issuedBy": "Issued By",
+    "decisions": "Decisions", "noDecisions": "No decisions yet",
+    "statuses": { "draft": "Draft", "active": "Active", "closed": "Closed" }
+  },
+  "evaluations": {
+    "title": "Evaluations", "new": "New Evaluation", "detail": "Evaluation Details",
+    "template": "Template", "criteria": "Criteria", "score": "Score",
+    "overallScore": "Overall Score", "weight": "Weight", "notes": "Notes",
+    "period": "Period", "evaluator": "Evaluator",
+    "noEvaluations": "No evaluations yet"
+  },
+  "acknowledgments": {
+    "title": "Acknowledgments", "pending": "Pending", "history": "History",
+    "acknowledge": "Acknowledge", "acknowledged": "Acknowledged successfully",
+    "mandatory": "Mandatory", "optional": "Optional",
+    "category": "Category", "expiresAt": "Expires at",
+    "noPending": "No pending acknowledgments", "noHistory": "No acknowledgment history"
+  },
+  "locations": {
+    "title": "Locations", "detail": "Location Details",
+    "building": "Building", "floor": "Floor", "roomNumber": "Room Number",
+    "coordinates": "Coordinates", "childLocations": "Sub-locations",
+    "types": { "building": "Building", "hall": "Hall", "meeting_room": "Meeting Room", "lab": "Lab", "auditorium": "Auditorium", "department": "Department", "outdoor_area": "Outdoor Area", "gate": "Gate", "library": "Library", "cafeteria": "Cafeteria", "parking": "Parking", "other": "Other" }
+  },
+  "rooms": {
+    "title": "Room Booking", "availability": "Availability",
+    "building": "Building", "capacity": "Capacity",
+    "videoConference": "Video Conference", "projector": "Projector",
+    "available": "Available", "booked": "Booked", "conflict": "Conflict",
+    "checkAvailability": "Check Availability"
+  },
+  "approvals": {
+    "title": "Approvals", "pending": "Pending Approvals",
+    "noApprovals": "No pending approvals",
+    "approveConfirm": "Approve this item?", "rejectConfirm": "Reject this item?",
+    "types": { "meeting": "Meeting", "mom": "Minutes", "committee": "Committee", "changeRequest": "Change Request" }
+  },
+  "changeRequests": {
+    "title": "Change Requests", "detail": "Change Request Details",
+    "reason": "Reason", "requester": "Requester", "reviewer": "Reviewer",
+    "reviewNotes": "Review Notes", "changes": "Changes",
+    "statuses": { "pending": "Pending", "approved": "Approved", "rejected": "Rejected" }
+  },
+  "liveSurvey": {
+    "title": "Live Survey", "presenter": "Presenter", "participant": "Participant",
+    "joinCode": "Join Code", "participants": "Participants",
+    "nextQuestion": "Next Question", "previousQuestion": "Previous",
+    "startVoting": "Start Voting", "stopVoting": "Stop Voting",
+    "endSession": "End Session", "waitingForQuestion": "Waiting for the next question...",
+    "sessionEnded": "Session ended", "voteCast": "Vote submitted!",
+    "votes": "votes"
+  },
+  "archive": {
+    "title": "My Archive", "chatAttachments": "Chat Files",
+    "fileAttachments": "Attachments", "announcements": "Announcements"
+  },
+  "reports": {
+    "title": "Reports", "committeeActivity": "Committee Activity", "meetingAttendance": "Meeting Attendance", "taskPerformance": "Task Performance",
+    "totalMeetings": "Total Meetings", "totalDecisions": "Total Decisions", "totalCompleted": "Completed Tasks",
+    "overallRate": "Overall Rate", "completionRate": "Completion Rate", "totalOverdue": "Total Overdue",
+    "committee": "Committee", "meetingsCount": "Meetings", "decisionsCount": "Decisions",
+    "meeting": "Meeting", "invited": "Invited", "present": "Present", "rate": "Rate",
+    "assignee": "Assignee", "total": "Total", "completed": "Completed", "overdue": "Overdue",
+    "exportExcel": "Export Excel"
+  },
+  "workflow": { "title": "Workflow Templates", "detail": "Workflow Detail", "steps": "Steps", "from": "From", "to": "To", "action": "Action", "role": "Required Role" },
   "notifications": { "title": "Notifications", "markRead": "Mark as Read", "empty": "No notifications", "unread": "Unread" },
-  "attachments": { "title": "Attachments", "upload": "Upload File", "download": "Download", "noFiles": "No attachments" },
-  "admin": { "title": "Administration", "auditLog": "Audit Log", "identity": "Identity Info" },
+  "attachments": { "title": "Attachments", "upload": "Upload File", "download": "Download", "noFiles": "No attachments", "size": "Size", "uploaded": "Uploaded" },
+  "admin": {
+    "title": "Administration", "auditLog": "Audit Log", "identity": "Identity Info",
+    "users": "Users", "roles": "Roles", "permissions": "Permissions",
+    "announcements": "Announcements", "adSync": "AD Sync", "acknowledgmentsAdmin": "Acknowledgments",
+    "userDetail": "User Details", "active": "Active", "inactive": "Inactive",
+    "toggleActive": "Toggle Active", "assignRole": "Assign Role", "removeRole": "Remove Role",
+    "roleName": "Role Name", "roleKey": "Key", "builtIn": "Built-in", "custom": "Custom",
+    "permissionGroups": "Permission Groups", "savePermissions": "Save Permissions",
+    "syncNow": "Sync Now", "syncHistory": "Sync History", "lastSync": "Last Sync",
+    "syncTotal": "Total", "syncCreated": "Created", "syncUpdated": "Updated", "syncErrors": "Errors",
+    "connectionStatus": "Connection Status",
+    "announcementType": "Type", "announcementTypes": { "circular": "Circular", "news": "News", "announcement": "Announcement" },
+    "publish": "Publish", "archive": "Archive", "templates": "Templates"
+  },
   "settings": { "title": "Settings", "language": "Language", "biometric": "Biometric Login", "notifications": "Notifications", "clearCache": "Clear Cache", "about": "About", "version": "Version", "appearance": "Appearance", "themeLight": "Light", "themeDark": "Dark", "themeSystem": "System" },
   "profile": {
-    "title": "My Profile",
-    "subtitle": "Manage your personal information",
+    "title": "My Profile", "subtitle": "Manage your personal information",
     "personalInfo": "Personal Information",
-    "displayNameAr": "Name (Arabic)",
-    "displayNameEn": "Name (English)",
-    "jobTitleAr": "Job Title (Arabic)",
-    "jobTitleEn": "Job Title (English)",
-    "department": "Department",
-    "phoneNumber": "Phone Number",
-    "email": "Email",
-    "employeeId": "Employee ID",
-    "changePhoto": "Change Photo",
-    "removePhoto": "Remove Photo",
-    "save": "Save",
-    "security": "Security",
-    "changePassword": "Change Password",
-    "preferences": "Preferences",
-    "language": "Language",
-    "theme": "Theme",
-    "notifyByEmail": "Email Notifications",
-    "notifyByPush": "Push Notifications",
-    "notifyBySms": "SMS Notifications",
-    "emailDigest": "Email Digest",
-    "saved": "Saved successfully",
-    "adManaged": "Managed by AD"
+    "displayNameAr": "Name (Arabic)", "displayNameEn": "Name (English)",
+    "jobTitleAr": "Job Title (Arabic)", "jobTitleEn": "Job Title (English)",
+    "department": "Department", "phoneNumber": "Phone Number",
+    "email": "Email", "employeeId": "Employee ID",
+    "changePhoto": "Change Photo", "removePhoto": "Remove Photo", "save": "Save",
+    "security": "Security", "changePassword": "Change Password",
+    "preferences": "Preferences", "language": "Language", "theme": "Theme",
+    "notifyByEmail": "Email Notifications", "notifyByPush": "Push Notifications",
+    "notifyBySms": "SMS Notifications", "emailDigest": "Email Digest",
+    "saved": "Saved successfully", "adManaged": "Managed by AD"
   },
-  "more": { "title": "More", "moms": "Meeting Minutes", "voting": "Voting", "surveys": "Surveys", "reports": "Reports", "workflow": "Workflow", "attachments": "Attachments", "admin": "Administration", "settings": "Settings", "profile": "My Profile" },
-  "actions": { "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit", "create": "Create", "back": "Back", "search": "Search", "filter": "Filter", "refresh": "Refresh", "confirm": "Confirm", "close": "Close", "submit": "Submit", "approve": "Approve", "reject": "Reject" },
-  "common": { "all": "All", "loading": "Loading...", "error": "An error occurred", "errorOccurred": "Something went wrong", "retry": "Retry", "noData": "No data available", "success": "Success", "confirmDelete": "Are you sure you want to delete?", "yes": "Yes", "no": "No", "share": "Share", "cancel": "Cancel" },
+  "more": {
+    "title": "More", "moms": "Meeting Minutes", "voting": "Voting", "surveys": "Surveys",
+    "reports": "Reports", "workflow": "Workflow", "attachments": "Attachments",
+    "admin": "Administration", "settings": "Settings", "profile": "My Profile",
+    "directives": "Directives", "evaluations": "Evaluations", "acknowledgments": "Acknowledgments",
+    "locations": "Locations", "roomBooking": "Room Booking", "approvals": "Approvals",
+    "changeRequests": "Change Requests", "archive": "My Archive"
+  },
+  "actions": { "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit", "create": "Create", "back": "Back", "search": "Search", "filter": "Filter", "refresh": "Refresh", "confirm": "Confirm", "close": "Close", "submit": "Submit", "approve": "Approve", "reject": "Reject", "download": "Download", "upload": "Upload", "share": "Share" },
+  "common": { "all": "All", "loading": "Loading...", "error": "An error occurred", "errorOccurred": "Something went wrong", "retry": "Retry", "noData": "No data available", "success": "Success", "confirmDelete": "Are you sure you want to delete?", "yes": "Yes", "no": "No", "share": "Share", "cancel": "Cancel", "from": "From", "to": "To", "date": "Date", "status": "Status", "name": "Name", "description": "Description" },
   "errors": { "generic": "Something went wrong", "network": "Network error", "unauthorized": "Session expired", "notFound": "Not found", "validation": "Please check the form" },
   "demo": { "banner": "Demo Mode", "notice": "You are in demo mode. Changes are not saved." }
 }
