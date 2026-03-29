@@ -83,12 +83,16 @@
 
 | Technology | Purpose |
 |-----------|---------|
-| React Native + Expo 55 | Cross-platform mobile |
-| React Navigation 7 | Native navigation |
-| TanStack React Query | Server state management |
-| expo-notifications | Push notifications |
-| expo-local-authentication | Biometric login |
-| React Native Reanimated | Animations |
+| React Native 0.83 + Expo 55 | Cross-platform mobile (iOS & Android) |
+| React Navigation 7 | Tab & stack navigation (6 tabs, 38+ screens) |
+| TanStack React Query 5 | Server state & cache management |
+| Microsoft SignalR | Real-time chat, notifications, live surveys |
+| i18next | Full Arabic (RTL) / English (LTR) support |
+| expo-notifications | Push notifications (FCM/APNs) |
+| expo-local-authentication | Biometric login (Face ID / Touch ID) |
+| React Native Reanimated 3 | Fluid animations & gesture handling |
+| expo-document-picker | File upload & attachment management |
+| expo-file-system | File download & local storage |
 
 ### Infrastructure
 
@@ -128,10 +132,41 @@ uoh-platform/
 │   │
 │   └── mobile/                       # React Native + Expo 55
 │       └── src/
-│           ├── screens/              # 13 feature screens
-│           ├── components/           # Mobile UI components
-│           ├── navigation/           # Tab & stack navigators
-│           └── services/             # API client layer
+│           ├── screens/              # 60+ screens across 19 modules
+│           │   ├── DashboardScreen   # Role-based dashboard with KPIs
+│           │   ├── committees/       # List, detail, form, members
+│           │   ├── meetings/         # List, detail, form, calendar
+│           │   ├── chat/             # Conversations, messaging, new chat
+│           │   ├── tasks/            # List, detail, form
+│           │   ├── moms/             # Minutes list & detail
+│           │   ├── voting/           # Voting list & detail
+│           │   ├── surveys/          # Surveys, responses, live polls
+│           │   ├── directives/       # List, detail, form
+│           │   ├── evaluations/      # List, detail, scoring form
+│           │   ├── acknowledgments/  # Pending & history views
+│           │   ├── approvals/        # Centralized approval center
+│           │   ├── change-requests/  # List & detail views
+│           │   ├── reports/          # Activity, attendance, tasks
+│           │   ├── workflow/         # Workflow list & visual detail
+│           │   ├── attachments/      # File browser with upload
+│           │   ├── locations/        # Location hierarchy & detail
+│           │   ├── rooms/            # Room booking & availability
+│           │   ├── notifications/    # Notification center
+│           │   ├── live-survey/      # Presenter & participant views
+│           │   ├── public/           # Public share & check-in
+│           │   ├── archive/          # Chat, files, announcements
+│           │   ├── admin/            # Users, roles, permissions,
+│           │   │                     # announcements, AD sync, acks
+│           │   └── more/             # Menu hub & profile
+│           ├── components/           # 20+ reusable UI components
+│           │   ├── ui/               # DatePicker, Select, BottomSheet,
+│           │   │                     # TabView, ActionSheet, ProgressBar
+│           │   └── chat/             # MessageBubble, Input, Typing
+│           ├── contexts/             # Auth, Theme, Chat providers
+│           ├── navigation/           # 6-tab navigator + nested stacks
+│           ├── services/             # API client, SignalR, file service
+│           ├── hooks/                # SignalR, file upload/download
+│           └── locales/              # AR/EN (~500 translation keys)
 │
 ├── packages/
 │   ├── shared/                       # Shared TypeScript types & utilities
@@ -144,6 +179,57 @@ uoh-platform/
 ├── scripts/                          # Build utilities
 └── .github/workflows/                # CI/CD (ci.yml, cd.yml)
 ```
+
+---
+
+## Mobile App — Full Feature Coverage
+
+The mobile app is a **complete, production-ready** implementation covering all platform features for all 5 stakeholder roles.
+
+### Navigation Structure
+
+```text
+Bottom Tabs (6)
+├── Dashboard        — Role-based KPIs, quick actions, recent items
+├── Committees       — List → Detail → Form → Members
+├── Meetings         — List → Detail → Form → Calendar
+├── Chat             — Conversations → Messages (real-time via SignalR)
+├── Tasks            — List → Detail → Form
+└── More             — 19 feature modules organized in 3 sections
+    ├── Features: MoMs, Voting, Surveys, Directives, Evaluations,
+    │             Acknowledgments, Approvals, Change Requests
+    ├── Resources: Reports, Workflow, Attachments, Locations,
+    │              Room Booking, Archive
+    └── System:   Admin Panel, Settings, Profile
+```
+
+### Stakeholder Roles
+
+| Role | Access |
+|------|--------|
+| **SystemAdmin** | Full access + Admin panel (users, roles, permissions, AD sync, announcements) |
+| **CommitteeHead** | Committee management, meeting creation, directive issuance, evaluations |
+| **CommitteeSecretary** | Meeting minutes, agenda management, task assignment, workflow |
+| **CommitteeMember** | Voting, surveys, task execution, acknowledgments, chat |
+| **Observer** | Read-only access to meetings, documents, and reports |
+
+### Real-time Features
+
+- **Chat** — Instant messaging with typing indicators, read receipts, file attachments (SignalR `/hubs/chat`)
+- **Notifications** — Live push notifications with badge counts (SignalR `/hubs/notifications`)
+- **Live Surveys** — Presenter controls + participant voting with live result charts (SignalR `/hubs/live-survey`)
+
+### Key Capabilities
+
+- Full **Arabic (RTL) / English (LTR)** bilingual support (~500 translation keys)
+- **Dark mode** / Light mode with system-aware theme switching
+- **Demo mode** — Built-in offline demo with mock data for all 5 roles (no server required)
+- **File management** — Upload via document picker, download with presigned URLs
+- **Biometric login** — Face ID / Touch ID support
+- **Pull-to-refresh** on all data screens
+- **Role-based UI** — Admin features hidden for non-admin users
+
+### Screen Count: 60+ screens across 19 feature modules
 
 ---
 
