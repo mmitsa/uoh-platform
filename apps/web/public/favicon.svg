@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2f8f71"/>
+      <stop offset="100%" stop-color="#1a4f3f"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="6.4" ry="6.4" fill="url(#bg)"/>
+
+  <!-- Simplified calendar + people for small size -->
+  <rect x="5.76" y="5.76" width="20.48" height="4.16" rx="1.28" fill="#FFF" opacity="0.95"/>
+  <rect x="9.6" y="4.16" width="1.92" height="3.84" rx="0.96" fill="#FFF"/>
+  <rect x="20.48" y="4.16" width="1.92" height="3.84" rx="0.96" fill="#FFF"/>
+  <rect x="5.76" y="9.92" width="20.48" height="14.4" rx="1.28" fill="#FFF" opacity="0.9"/>
+
+  <!-- Simple check for small icon -->
+  <path d="M10.24 16.64 L14.4 20.8 L21.76 13.44"
+        fill="none" stroke="#1e5f4c" stroke-width="1.92" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="16" y="28.16" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-weight="bold"
+        font-size="3.84" fill="#FFF">UOH</text>
+</svg>

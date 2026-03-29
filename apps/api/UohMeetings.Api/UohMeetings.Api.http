@@ -1,0 +1,6 @@
+@UohMeetings.Api_HostAddress = http://localhost:5182
+
+GET {{UohMeetings.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

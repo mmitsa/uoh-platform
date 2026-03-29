@@ -1,0 +1,49 @@
+name: ci
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Restore
+        run: dotnet restore UohMeetings.sln
+      - name: Lint (format check)
+        run: dotnet format UohMeetings.sln --verify-no-changes --no-restore
+      - name: Build
+        run: dotnet build UohMeetings.sln -c Release --no-restore
+      - name: Test
+        run: dotnet test UohMeetings.sln -c Release --no-build --collect:"XPlat Code Coverage" --results-directory ./coverage
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-coverage
+          path: ./coverage/**/coverage.cobertura.xml
+          retention-days: 14
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install
+        run: npm install
+      - name: Lint
+        run: npm --workspace apps/web run lint
+      - name: Type check
+        run: npx --workspace apps/web tsc --noEmit
+      - name: Test
+        run: npm --workspace apps/web run test --if-present
+      - name: Build web
+        run: npm --workspace apps/web run build

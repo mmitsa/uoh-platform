@@ -1,0 +1,227 @@
+name: cd
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "production"
+        type: choice
+        options:
+          - staging
+          - production
+      skip_build:
+        description: "Skip build step (deploy existing artifacts)"
+        required: false
+        default: false
+        type: boolean
+      migrate_db:
+        description: "Run database migrations"
+        required: false
+        default: true
+        type: boolean
+
+env:
+  DOTNET_VERSION: "8.0.x"
+  NODE_VERSION: "20"
+
+jobs:
+  # ─────────────────────────────────────────────────────
+  #  Build API
+  # ─────────────────────────────────────────────────────
+  build-api:
+    if: ${{ !inputs.skip_build }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore apps/api/UohMeetings.Api/UohMeetings.Api.csproj
+
+      - name: Publish API
+        run: dotnet publish apps/api/UohMeetings.Api/UohMeetings.Api.csproj -c Release -o ./publish/api --no-restore /p:UseAppHost=false
+
+      - name: Copy web.config
+        run: |
+          Copy-Item apps/api/UohMeetings.Api/web.config ./publish/api/ -Force
+
+      - name: Upload API artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-publish
+          path: ./publish/api/
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────
+  #  Build Web
+  # ─────────────────────────────────────────────────────
+  build-web:
+    if: ${{ !inputs.skip_build }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build web
+        run: npm --workspace apps/web run build
+        env:
+          VITE_API_BASE_URL: ${{ inputs.environment == 'production' && secrets.PROD_API_URL || secrets.STAGING_API_URL }}
+          VITE_AAD_CLIENT_ID: ${{ secrets.AAD_SPA_CLIENT_ID }}
+          VITE_AAD_AUTHORITY: ${{ secrets.AAD_AUTHORITY }}
+          VITE_AAD_API_SCOPE: ${{ secrets.AAD_API_SCOPE }}
+
+      - name: Copy web.config
+        run: cp apps/web/web.config apps/web/dist/
+
+      - name: Upload Web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-publish
+          path: ./apps/web/dist/
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────
+  #  Build Mobile (EAS)
+  # ─────────────────────────────────────────────────────
+  build-mobile:
+    if: ${{ !inputs.skip_build }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Setup EAS CLI
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build Android (production)
+        if: inputs.environment == 'production'
+        working-directory: apps/mobile
+        run: eas build --platform android --profile production --non-interactive
+
+      - name: Build iOS (production)
+        if: inputs.environment == 'production'
+        working-directory: apps/mobile
+        run: eas build --platform ios --profile production --non-interactive
+
+  # ─────────────────────────────────────────────────────
+  #  Deploy to Windows Server
+  # ─────────────────────────────────────────────────────
+  deploy:
+    needs: [build-api, build-web]
+    if: always() && (needs.build-api.result == 'success' || inputs.skip_build) && (needs.build-web.result == 'success' || inputs.skip_build)
+    runs-on: windows-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download API artifact
+        if: ${{ !inputs.skip_build }}
+        uses: actions/download-artifact@v4
+        with:
+          name: api-publish
+          path: ./artifacts/api
+
+      - name: Download Web artifact
+        if: ${{ !inputs.skip_build }}
+        uses: actions/download-artifact@v4
+        with:
+          name: web-publish
+          path: ./artifacts/web
+
+      # Deploy to the Windows Server via WinRM
+      # Requires the server to have WinRM enabled and configured
+      - name: Deploy via WinRM
+        shell: pwsh
+        env:
+          SERVER_HOST: ${{ secrets.DEPLOY_SERVER_HOST }}
+          SERVER_USER: ${{ secrets.DEPLOY_SERVER_USER }}
+          SERVER_PASSWORD: ${{ secrets.DEPLOY_SERVER_PASSWORD }}
+          API_PUBLISH_PATH: ${{ secrets.API_PUBLISH_PATH }}
+          WEB_PUBLISH_PATH: ${{ secrets.WEB_PUBLISH_PATH }}
+        run: |
+          # Create credential
+          $secPassword = ConvertTo-SecureString $env:SERVER_PASSWORD -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential($env:SERVER_USER, $secPassword)
+
+          # Create session
+          $sessionOpt = New-PSSessionOption -SkipCACheck -SkipCNCheck
+          $session = New-PSSession -ComputerName $env:SERVER_HOST -Credential $cred -UseSSL -SessionOption $sessionOpt
+
+          try {
+            # Stop IIS sites before deploying
+            Invoke-Command -Session $session -ScriptBlock {
+              Import-Module WebAdministration
+              Stop-WebAppPool -Name "UOH-API-Pool" -ErrorAction SilentlyContinue
+              Stop-WebAppPool -Name "UOH-Web-Pool" -ErrorAction SilentlyContinue
+              Start-Sleep -Seconds 3
+            }
+
+            # Copy API artifacts
+            if (-not ${{ inputs.skip_build }}) {
+              Copy-Item -Path "./artifacts/api/*" -Destination $env:API_PUBLISH_PATH -ToSession $session -Recurse -Force
+              Copy-Item -Path "./artifacts/web/*" -Destination $env:WEB_PUBLISH_PATH -ToSession $session -Recurse -Force
+            }
+
+            # Run migrations if requested
+            if (${{ inputs.migrate_db }}) {
+              Invoke-Command -Session $session -ScriptBlock {
+                param($apiPath)
+                Set-Location $apiPath
+                dotnet UohMeetings.Api.dll --migrate-only 2>$null
+              } -ArgumentList $env:API_PUBLISH_PATH
+            }
+
+            # Start IIS sites
+            Invoke-Command -Session $session -ScriptBlock {
+              Import-Module WebAdministration
+              Start-WebAppPool -Name "UOH-API-Pool"
+              Start-WebAppPool -Name "UOH-Web-Pool"
+            }
+
+            # Health check
+            Invoke-Command -Session $session -ScriptBlock {
+              Start-Sleep -Seconds 10
+              try {
+                $health = Invoke-RestMethod "http://localhost:5000/health" -TimeoutSec 15
+                Write-Host "API Health: $($health.status)" -ForegroundColor Green
+                Write-Host "  Database: $($health.checks.database)"
+                Write-Host "  Redis: $($health.checks.redis)"
+              } catch {
+                Write-Warning "Health check failed: $_"
+              }
+            }
+          } finally {
+            Remove-PSSession $session
+          }
+
+      - name: Deployment Summary
+        shell: pwsh
+        run: |
+          Write-Host "========================================" -ForegroundColor Green
+          Write-Host "  Deployment Complete!" -ForegroundColor Green
+          Write-Host "  Environment: ${{ inputs.environment }}" -ForegroundColor Green
+          Write-Host "  Build: $(if ('${{ inputs.skip_build }}' -eq 'true') { 'Skipped' } else { 'Fresh' })" -ForegroundColor Green
+          Write-Host "  Migrations: $(if ('${{ inputs.migrate_db }}' -eq 'true') { 'Applied' } else { 'Skipped' })" -ForegroundColor Green
+          Write-Host "========================================" -ForegroundColor Green

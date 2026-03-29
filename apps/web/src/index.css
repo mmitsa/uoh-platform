@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap');
+@import 'leaflet/dist/leaflet.css';
+
+@import '../../../packages/ui/src/tokens.css';
+
+@import 'tailwindcss';
+@config '../tailwind.config.cjs';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--uoh-neutral-50));
+  color: rgb(var(--uoh-neutral-900));
+}
+
+/* direction is controlled via [dir] on html */
+html[dir='rtl'] body {
+  font-family: var(--uoh-font-ar);
+}
+html[dir='ltr'] body {
+  font-family: var(--uoh-font-en);
+}
+
+html[data-gray='1'] {
+  filter: grayscale(100%);
+}

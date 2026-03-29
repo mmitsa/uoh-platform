@@ -1,0 +1,106 @@
+:root {
+  /* Brand */
+  --uoh-brand-50: 238 247 244;
+  --uoh-brand-100: 217 238 230;
+  --uoh-brand-200: 182 222 206;
+  --uoh-brand-300: 139 201 178;
+  --uoh-brand-400: 86 174 144;
+  --uoh-brand-500: 47 143 113;
+  --uoh-brand-600: 36 117 92;
+  --uoh-brand-700: 30 95 76;
+  --uoh-brand-800: 27 79 64;
+  --uoh-brand-900: 23 66 54;
+
+  /* Accent */
+  --uoh-accent-500: 249 115 22;
+
+  /* Neutral */
+  --uoh-neutral-0: 255 255 255;
+  --uoh-neutral-50: 248 250 252;
+  --uoh-neutral-100: 241 245 249;
+  --uoh-neutral-200: 226 232 240;
+  --uoh-neutral-300: 203 213 225;
+  --uoh-neutral-400: 148 163 184;
+  --uoh-neutral-500: 100 116 139;
+  --uoh-neutral-600: 71 85 105;
+  --uoh-neutral-700: 51 65 85;
+  --uoh-neutral-800: 31 41 55;
+  --uoh-neutral-900: 15 23 42;
+
+  /* Semantic */
+  --uoh-success: 22 163 74;
+  --uoh-warning: 245 158 11;
+  --uoh-danger: 220 38 38;
+  --uoh-info: 37 99 235;
+
+  /* Semantic tints (for Alert/Badge backgrounds) */
+  --uoh-success-50: 240 253 244;
+  --uoh-warning-50: 254 252 232;
+  --uoh-danger-50: 254 242 242;
+  --uoh-info-50: 239 246 255;
+
+  /* Typography */
+  --uoh-font-ar: "Noto Kufi Arabic", ui-sans-serif, system-ui;
+  --uoh-font-en: "Inter", ui-sans-serif, system-ui;
+
+  /* Radius */
+  --uoh-radius-sm: 8px;
+  --uoh-radius-md: 10px;
+  --uoh-radius-lg: 14px;
+
+  /* Shadow */
+  --uoh-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --uoh-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --uoh-shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+
+  /* Layout */
+  --uoh-sidebar-width: 260px;
+  --uoh-sidebar-collapsed-width: 72px;
+  --uoh-topbar-height: 56px;
+  --uoh-chat-panel-width: 400px;
+}
+
+/* ─── Dark theme ─── */
+[data-theme="dark"] {
+  /* Neutral – inverted for dark backgrounds */
+  --uoh-neutral-0: 17 24 39;
+  --uoh-neutral-50: 11 15 25;
+  --uoh-neutral-100: 22 30 46;
+  --uoh-neutral-200: 38 50 72;
+  --uoh-neutral-300: 55 70 95;
+  --uoh-neutral-400: 120 135 160;
+  --uoh-neutral-500: 148 163 184;
+  --uoh-neutral-600: 180 192 210;
+  --uoh-neutral-700: 210 218 230;
+  --uoh-neutral-800: 230 236 244;
+  --uoh-neutral-900: 240 245 250;
+
+  /* Brand – slightly brighter for dark bg readability */
+  --uoh-brand-50: 20 40 35;
+  --uoh-brand-100: 25 55 45;
+  --uoh-brand-200: 30 70 58;
+  --uoh-brand-300: 50 120 95;
+  --uoh-brand-400: 70 155 125;
+  --uoh-brand-500: 55 165 130;
+  --uoh-brand-600: 47 143 113;
+  --uoh-brand-700: 55 165 130;
+  --uoh-brand-800: 80 190 155;
+  --uoh-brand-900: 139 220 190;
+
+  /* Semantic – brighter on dark */
+  --uoh-success: 34 197 94;
+  --uoh-warning: 251 191 36;
+  --uoh-danger: 248 113 113;
+  --uoh-info: 96 165 250;
+
+  /* Semantic tints – dark versions */
+  --uoh-success-50: 20 40 28;
+  --uoh-warning-50: 40 35 18;
+  --uoh-danger-50: 45 20 20;
+  --uoh-info-50: 20 30 50;
+
+  /* Shadows – stronger for dark bg */
+  --uoh-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --uoh-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --uoh-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+}

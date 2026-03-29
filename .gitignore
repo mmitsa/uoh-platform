@@ -1,0 +1,30 @@
+.DS_Store
+.idea
+.vscode
+
+# Node
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite
+apps/web/dist
+
+# Expo
+apps/mobile/.expo
+apps/mobile/dist
+
+# .NET
+bin
+obj
+*.user
+*.suo
+*.cache
+*.log
+
+# Environment files
+.env
+.env.*
+
