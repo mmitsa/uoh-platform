@@ -19,7 +19,9 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Used for uploading attachments",
         "NSPhotoLibraryUsageDescription": "Used for uploading attachments",
-        "UIBackgroundModes": ["remote-notification"]
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
       }
     },
     "android": {
@@ -52,7 +54,9 @@
           "defaultChannel": "default",
           "sounds": []
         }
-      ]
+      ],
+      "expo-secure-store",
+      "expo-sharing"
     ],
     "extra": {
       "eas": {

@@ -31,7 +31,7 @@ export function ActionSheet({ visible, onClose, title, options }: Props) {
           onPress={() => { onClose(); opt.onPress(); }}
         >
           {opt.icon && (
-            <Ionicons name={opt.icon} size={22} color={opt.destructive ? theme.colors.danger : theme.colors.text} style={{ marginRight: 12 }} />
+            <Ionicons name={opt.icon} size={22} color={opt.destructive ? theme.colors.danger : theme.colors.text} style={{ marginEnd: 12 }} />
           )}
           <Text style={[styles.optionText, { color: opt.destructive ? theme.colors.danger : theme.colors.text }]}>
             {opt.label}

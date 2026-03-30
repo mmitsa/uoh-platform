@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, type TextInputProps, type StyleProp, type ViewStyle } from 'react-native';
+import { I18nManager, StyleSheet, Text, TextInput, View, type TextInputProps, type StyleProp, type ViewStyle } from 'react-native';
 import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
 import type { Theme } from '../../ui/theme';
 
@@ -18,6 +18,7 @@ export function Input({ label, error, containerStyle, style, ...rest }: Props) {
       <TextInput
         style={[styles.input, error && styles.inputError, style]}
         placeholderTextColor={theme.colors.textMuted}
+        textAlign={I18nManager.isRTL ? 'right' : 'left'}
         {...rest}
       />
       {error && <Text style={styles.error}>{error}</Text>}

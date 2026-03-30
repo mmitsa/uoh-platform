@@ -21,6 +21,6 @@ export function NotificationBell({ count = 0, onPress }: { count?: number; onPre
 }
 
 const createStyles = (theme: Theme) => StyleSheet.create({
-  badge: { position: 'absolute', top: -4, right: -6, backgroundColor: theme.colors.danger, borderRadius: 10, minWidth: 18, height: 18, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
+  badge: { position: 'absolute', top: -4, end: -6, backgroundColor: theme.colors.danger, borderRadius: 10, minWidth: 18, height: 18, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
   badgeText: { color: '#fff', fontSize: 10, fontWeight: '700' },
 });

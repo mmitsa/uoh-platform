@@ -150,7 +150,7 @@ export function ChangeRequestDetailScreen({ route, navigation }: any) {
                     <Text style={styles.changeLabel}>{t('changeRequests.from')}</Text>
                     <Text style={styles.changeValue}>{change.from || '—'}</Text>
                   </View>
-                  <Ionicons name="arrow-forward" size={16} color={theme.colors.textMuted} />
+                  <Ionicons name={isAr ? 'arrow-back' : 'arrow-forward'} size={16} color={theme.colors.textMuted} />
                   <View style={styles.changeTo}>
                     <Text style={styles.changeLabel}>{t('changeRequests.to')}</Text>
                     <Text style={[styles.changeValue, { color: theme.colors.primary }]}>

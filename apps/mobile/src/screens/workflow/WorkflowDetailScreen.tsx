@@ -65,7 +65,8 @@ export function WorkflowDetailScreen({ route }: any) {
   const theme = useTheme();
   const styles = useThemedStyles(createStyles);
   const { id } = route.params as { id: string };
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
 
   const { data, isLoading } = useQuery({
     queryKey: ['workflow', id],
@@ -202,7 +203,7 @@ export function WorkflowDetailScreen({ route }: any) {
 
                     {step.nextSteps && step.nextSteps.length > 0 && (
                       <View style={styles.nextSteps}>
-                        <Ionicons name="arrow-forward-outline" size={12} color={theme.colors.textMuted} />
+                        <Ionicons name={isAr ? 'arrow-back-outline' : 'arrow-forward-outline'} size={12} color={theme.colors.textMuted} />
                         <Text style={styles.nextStepText}>
                           {t('workflow.nextSteps')}: {step.nextSteps.join(', ')}
                         </Text>

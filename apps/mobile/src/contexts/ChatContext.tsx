@@ -94,7 +94,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: 'SET_LOADING', payload: true });
     try {
       const res = await api.get<PagedResponse<ChatConversation>>('/api/v1/chat/conversations');
-      dispatch({ type: 'SET_CONVERSATIONS', payload: res.items });
+      dispatch({ type: 'SET_CONVERSATIONS', payload: res?.items ?? [] });
     } catch {
       dispatch({ type: 'SET_LOADING', payload: false });
     }

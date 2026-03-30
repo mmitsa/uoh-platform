@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, I18nManager, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme, useThemedStyles } from '../contexts/ThemeContext';
@@ -98,7 +98,7 @@ export function LoginScreen() {
                   style={({ pressed }) => [styles.roleBtn, pressed && { opacity: 0.7 }]}>
                   <Ionicons name="person-outline" size={20} color={theme.colors.primary} />
                   <Text style={styles.roleText}>{t(`auth.roles.${role}`)}</Text>
-                  <Ionicons name="chevron-forward" size={16} color={theme.colors.textMuted} />
+                  <Ionicons name={I18nManager.isRTL ? 'chevron-back' : 'chevron-forward'} size={16} color={theme.colors.textMuted} />
                 </Pressable>
               ))}
             </View>

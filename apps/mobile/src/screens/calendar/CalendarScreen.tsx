@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View, RefreshControl } from 'react-native';
+import { FlatList, I18nManager, Pressable, StyleSheet, Text, View, RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
@@ -118,7 +118,7 @@ export function CalendarScreen({ navigation }: any) {
             <Text style={styles.eventLocation}>{item.location}</Text>
           )}
         </View>
-        <Ionicons name="chevron-forward" size={16} color={theme.colors.textMuted} />
+        <Ionicons name={I18nManager.isRTL ? 'chevron-back' : 'chevron-forward'} size={16} color={theme.colors.textMuted} />
       </Pressable>
     );
   }, [isAr, t, navigation]);

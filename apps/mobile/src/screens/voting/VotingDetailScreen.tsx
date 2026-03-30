@@ -189,7 +189,7 @@ const createStyles = (theme: Theme) => StyleSheet.create({
   voteCount: { fontSize: 14, fontWeight: '700', color: theme.colors.textSecondary },
   barBg: { height: 6, backgroundColor: theme.colors.borderLight, borderRadius: 3, marginTop: 8 },
   barFill: { height: 6, backgroundColor: theme.colors.primary, borderRadius: 3 },
-  percentage: { fontSize: 12, color: theme.colors.textMuted, marginTop: 4, textAlign: 'right' },
+  percentage: { fontSize: 12, color: theme.colors.textMuted, marginTop: 4 },
 
   actions: { flexDirection: 'row', gap: 12, marginTop: 20 },
 });

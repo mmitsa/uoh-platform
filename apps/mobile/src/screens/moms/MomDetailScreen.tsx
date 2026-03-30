@@ -168,7 +168,7 @@ export function MomDetailScreen({ route }: any) {
           <Text style={styles.sectionTitle}>{String(t('moms.workflowHistory', 'Workflow History'))}</Text>
           {workflow.history.map((h: any, idx: number) => (
             <View key={idx} style={styles.historyRow}>
-              <Ionicons name="arrow-forward-circle" size={16} color={theme.colors.primary} />
+              <Ionicons name={isAr ? 'arrow-back-circle' : 'arrow-forward-circle'} size={16} color={theme.colors.primary} />
               <View style={{ flex: 1 }}>
                 <Text style={styles.historyAction}>{h.action}: {h.fromState} → {h.toState}</Text>
                 <Text style={styles.historyMeta}>

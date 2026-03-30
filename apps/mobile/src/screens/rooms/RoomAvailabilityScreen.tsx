@@ -211,7 +211,6 @@ const createStyles = (theme: Theme) =>
       fontSize: 12,
       fontWeight: '600',
       color: theme.colors.textMuted,
-      textAlign: 'right',
     },
     slotBar: {
       flex: 1,

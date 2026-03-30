@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { I18nManager, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
@@ -117,7 +117,7 @@ export function UsersListScreen({ navigation }: any) {
               </View>
             </View>
 
-            <Ionicons name="chevron-forward" size={18} color={theme.colors.textMuted} />
+            <Ionicons name={I18nManager.isRTL ? 'chevron-back' : 'chevron-forward'} size={18} color={theme.colors.textMuted} />
           </Pressable>
         )}
       />
@@ -133,8 +133,8 @@ const createStyles = (theme: Theme) => StyleSheet.create({
 
   searchContainer: { paddingHorizontal: 16, marginBottom: 8 },
   searchInputWrap: { flexDirection: 'row', alignItems: 'center' },
-  searchIcon: { position: 'absolute', left: 12, zIndex: 1 },
-  searchInput: { paddingLeft: 36 },
+  searchIcon: { position: 'absolute', start: 12, zIndex: 1 },
+  searchInput: { paddingStart: 36 },
 
   countText: { fontSize: 12, color: theme.colors.textMuted, paddingHorizontal: 16, marginBottom: 8 },
 

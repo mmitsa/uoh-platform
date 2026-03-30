@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { I18nManager, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
@@ -56,7 +56,7 @@ export function MoreMenuScreen({ navigation }: any) {
           >
             <Ionicons name={item.icon} size={22} color={theme.colors.primary} />
             <Text style={styles.menuText}>{t(`more.${item.key}`)}</Text>
-            <Ionicons name="chevron-forward" size={18} color={theme.colors.textMuted} />
+            <Ionicons name={I18nManager.isRTL ? 'chevron-back' : 'chevron-forward'} size={18} color={theme.colors.textMuted} />
           </Pressable>
         ))}
       </View>
@@ -74,7 +74,7 @@ export function MoreMenuScreen({ navigation }: any) {
       <Pressable style={styles.notificationBtn} onPress={() => navigation.navigate('Notifications')}>
         <Ionicons name="notifications-outline" size={22} color={theme.colors.primary} />
         <Text style={styles.menuText}>{t('notifications.title')}</Text>
-        <Ionicons name="chevron-forward" size={18} color={theme.colors.textMuted} />
+        <Ionicons name={I18nManager.isRTL ? 'chevron-back' : 'chevron-forward'} size={18} color={theme.colors.textMuted} />
       </Pressable>
 
       <Pressable style={styles.logoutBtn} onPress={logout}>

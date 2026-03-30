@@ -93,7 +93,7 @@ export function CommitteeMembersScreen({ route }: any) {
 const createStyles = (theme: Theme) => StyleSheet.create({
   container: { flex: 1, backgroundColor: theme.colors.background },
   card: { flexDirection: 'row', alignItems: 'center', padding: 12, backgroundColor: theme.colors.surface, borderRadius: 12, marginBottom: 8 },
-  info: { flex: 1, marginLeft: 12 },
+  info: { flex: 1, marginStart: 12 },
   name: { fontSize: 15, fontWeight: '600' },
   email: { fontSize: 12, marginTop: 2 },
 });

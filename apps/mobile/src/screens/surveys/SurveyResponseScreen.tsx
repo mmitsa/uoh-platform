@@ -275,7 +275,7 @@ const createStyles = (theme: Theme) => StyleSheet.create({
   yesNoText: { fontSize: 15, fontWeight: '600', color: theme.colors.textSecondary },
 
   submitBar: {
-    position: 'absolute', bottom: 0, left: 0, right: 0,
+    position: 'absolute', bottom: 0, start: 0, end: 0,
     flexDirection: 'row', padding: 16, backgroundColor: theme.colors.surface,
     borderTopWidth: 1, borderTopColor: theme.colors.borderLight,
   },

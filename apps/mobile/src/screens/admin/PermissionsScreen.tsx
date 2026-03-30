@@ -260,7 +260,7 @@ const createStyles = (theme: Theme) => StyleSheet.create({
     gap: 8,
   },
   categoryTitle: { fontSize: 15, fontWeight: '700', color: theme.colors.text, flex: 1 },
-  categoryCount: { fontSize: 12, color: theme.colors.textMuted, marginRight: 8 },
+  categoryCount: { fontSize: 12, color: theme.colors.textMuted, marginEnd: 8 },
   selectAllBtn: { padding: 4 },
 
   permissionsList: { marginTop: 12, gap: 2 },
@@ -279,8 +279,8 @@ const createStyles = (theme: Theme) => StyleSheet.create({
   saveBar: {
     position: 'absolute',
     bottom: 0,
-    left: 0,
-    right: 0,
+    start: 0,
+    end: 0,
     padding: 16,
     backgroundColor: theme.colors.surface,
     borderTopWidth: 1,

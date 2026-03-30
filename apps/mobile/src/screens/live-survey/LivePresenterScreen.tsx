@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, I18nManager, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
@@ -239,7 +239,7 @@ export function LivePresenterScreen({ route, navigation }: any) {
           disabled={currentIndex <= 0}
           style={[styles.navButton, currentIndex <= 0 && styles.navDisabled]}
         >
-          <Ionicons name="chevron-back" size={24} color={currentIndex > 0 ? theme.colors.primary : theme.colors.textMuted} />
+          <Ionicons name={I18nManager.isRTL ? 'chevron-forward' : 'chevron-back'} size={24} color={currentIndex > 0 ? theme.colors.primary : theme.colors.textMuted} />
           <Text style={[styles.navText, currentIndex <= 0 && { color: theme.colors.textMuted }]}>
             {t('liveSurvey.previous')}
           </Text>
@@ -253,7 +253,7 @@ export function LivePresenterScreen({ route, navigation }: any) {
           <Text style={[styles.navText, currentIndex >= questions.length - 1 && { color: theme.colors.textMuted }]}>
             {t('liveSurvey.next')}
           </Text>
-          <Ionicons name="chevron-forward" size={24} color={currentIndex < questions.length - 1 ? theme.colors.primary : theme.colors.textMuted} />
+          <Ionicons name={I18nManager.isRTL ? 'chevron-back' : 'chevron-forward'} size={24} color={currentIndex < questions.length - 1 ? theme.colors.primary : theme.colors.textMuted} />
         </Pressable>
       </View>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { I18nManager, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
@@ -64,7 +64,7 @@ export function EvaluationsListScreen({ navigation }: any) {
                 </Text>
                 <ProgressBar progress={score} height={4} color={scoreColor(score, maxScore)} />
               </View>
-              <Ionicons name="chevron-forward" size={18} color={theme.colors.textMuted} />
+              <Ionicons name={I18nManager.isRTL ? 'chevron-back' : 'chevron-forward'} size={18} color={theme.colors.textMuted} />
             </Pressable>
           );
         }}

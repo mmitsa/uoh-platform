@@ -1,3 +1,4 @@
+import { I18nManager } from 'react-native';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -30,6 +31,11 @@ void loadSavedLang().then(lng => {
 
 export async function setLocale(locale: 'ar' | 'en') {
   (globalThis as any).__uohLocale = locale;
+  const shouldRtl = locale === 'ar';
+  if (I18nManager.isRTL !== shouldRtl) {
+    I18nManager.allowRTL(shouldRtl);
+    I18nManager.forceRTL(shouldRtl);
+  }
   await AsyncStorage.setItem(LANG_KEY, locale);
   await i18n.changeLanguage(locale);
 }

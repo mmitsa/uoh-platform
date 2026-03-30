@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, type TextInputProps, type StyleProp, type ViewStyle } from 'react-native';
+import { I18nManager, StyleSheet, Text, TextInput, View, type TextInputProps, type StyleProp, type ViewStyle } from 'react-native';
 import { useTheme, useThemedStyles } from '../../contexts/ThemeContext';
 import type { Theme } from '../../ui/theme';
 
@@ -21,6 +21,7 @@ export function Textarea({ label, error, containerStyle, style, ...rest }: Props
         multiline
         numberOfLines={4}
         textAlignVertical="top"
+        textAlign={I18nManager.isRTL ? 'right' : 'left'}
         placeholderTextColor={theme.colors.textMuted}
         {...rest}
       />

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useMemo } from 'react';
-import { I18nManager, Platform, View, Text, StyleSheet } from 'react-native';
+import { useMemo } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -10,6 +10,7 @@ import './src/i18n';
 import { queryClient } from './src/lib/queryClient';
 import { AuthProvider, useAuth } from './src/contexts/AuthContext';
 import { ThemeProvider, useTheme, useThemeMode } from './src/contexts/ThemeContext';
+import { ChatProvider } from './src/contexts/ChatContext';
 import { LoginScreen } from './src/screens/LoginScreen';
 import { MainTabNavigator } from './src/navigation/MainTabNavigator';
 import { isDemoMode } from './src/api/apiClient';
@@ -21,15 +22,6 @@ function RootNavigator() {
   const { user, isLoading } = useAuth();
   const theme = useTheme();
   const { isDark } = useThemeMode();
-
-  useEffect(() => {
-    const locale = (globalThis as any).__uohLocale ?? 'ar';
-    const shouldRtl = locale === 'ar';
-    if (I18nManager.isRTL !== shouldRtl) {
-      I18nManager.allowRTL(shouldRtl);
-      I18nManager.forceRTL(shouldRtl);
-    }
-  }, []);
 
   // Build React Navigation theme from our app theme
   const navTheme = useMemo(() => {
@@ -87,8 +79,10 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <AuthProvider>
-            <RootNavigator />
-            <StatusBarWrapper />
+            <ChatProvider>
+              <RootNavigator />
+              <StatusBarWrapper />
+            </ChatProvider>
           </AuthProvider>
         </ThemeProvider>
       </QueryClientProvider>

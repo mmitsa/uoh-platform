@@ -86,5 +86,5 @@ const styles = StyleSheet.create({
   search: { flex: 1, padding: 10, borderRadius: 8, borderWidth: 1, fontSize: 15 },
   item: { flexDirection: 'row', alignItems: 'center', padding: 14, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#eee' },
   itemLabel: { flex: 1, fontSize: 15 },
-  itemSub: { fontSize: 12, marginRight: 8 },
+  itemSub: { fontSize: 12, marginEnd: 8 },
 });

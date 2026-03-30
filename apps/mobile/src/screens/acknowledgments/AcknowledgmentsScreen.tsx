@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { I18nManager, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
@@ -154,7 +154,7 @@ export function AcknowledgmentsScreen({ navigation }: any) {
                 )}
               </View>
               <Ionicons
-                name="chevron-forward"
+                name={I18nManager.isRTL ? 'chevron-back' : 'chevron-forward'}
                 size={18}
                 color={theme.colors.textMuted}
               />
